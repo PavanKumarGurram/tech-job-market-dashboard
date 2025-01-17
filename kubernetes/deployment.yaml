@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tech-job-market-trends
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tech-job-market-trends
+  template:
+    metadata:
+      labels:
+        app: tech-job-market-trends
+    spec:
+      containers:
+      - name: backend
+        image: backend:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: FLASK_ENV
+          value: "development"
+        - name: DATABASE_URL
+          value: "postgresql://user:password@db/dbname"
+        - name: SECRET_KEY
+          value: "your_secret_key"
+        - name: LINKEDIN_CLIENT_ID
+          value: "your_linkedin_client_id"
+        - name: LINKEDIN_CLIENT_SECRET
+          value: "your_linkedin_client_secret"
+      - name: frontend
+        image: frontend:latest
+        ports:
+        - containerPort: 3000
+      - name: db
+        image: postgres:13
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_USER
+          value: "user"
+        - name: POSTGRES_PASSWORD
+          value: "password"
+        - name: POSTGRES_DB
+          value: "dbname"
