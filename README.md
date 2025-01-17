@@ -1,2 +1,1 @@
-# tech-job-market-dashboard
-A repository for a tech job market dashboard
+This repository is empty. Any task executed on it should be considered a new capability and needs to be created.
